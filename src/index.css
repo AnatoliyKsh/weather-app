@@ -7,8 +7,9 @@
 .bigContener {
     opacity: 0;
     animation: ani 2.5s forwards;
-}
 
+
+}
 @keyframes ani {
     0% {
         opacity: 0;
@@ -46,13 +47,14 @@ h1 {
 .app:before {
     content: '';
     background: url('./pic/derBerg.jpg') no-repeat center center/cover;
-    position: absolute;
+    position: fixed;
     width: 100%;
-    min-height: 580px;
+    min-height: 100%;
     top: 0;
     left: 0;
     z-index: -1;
     max-height: 580px;
+
 
 }
 
@@ -78,11 +80,13 @@ h1 {
     max-width: 700px;
     height: 100%;
     margin: auto;
-    padding: 0 1rem;
     position: relative;
     top: 10%;
     display: flex;
     flex-direction: column;
+    padding: 10px 30px 10px 20px;
+
+
 
 }
 
@@ -111,3 +115,33 @@ h1 {
 .bold {
     font-weight: 700;
 }
+
+.history{
+    color: #e0e0e0;
+    justify-content: center;
+
+}
+
+
+
+.clickable-text {
+    text-decoration: underline;
+    cursor: pointer;
+    color: lightgray;
+    font-size: 20px;
+}
+
+.clickable-text:hover {
+    color: white;
+}
+.container-hostory {
+    width: 700px;
+    background-color: rgba(255, 255, 255, 0.5);
+    padding: 10px;
+    margin: 20% auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+

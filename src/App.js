@@ -1,32 +1,54 @@
 import React, {useState} from 'react'
 import axios from 'axios'
+import RequestHistory from './RequestHistory';
+
 
 function App() {
     const [data, setData] = useState({})
     const [location, setLocation] = useState('')
+    const [error, setError] = useState('');
+    const [requestHistory, setRequestHistory] = useState([]);
+
 
     const url = `https://api.openweathermap.org/data/2.5/weather?q=${location}&units=imperial&appid=895284fb2d2c50a520ea537456963d9c`
 
     const searchLocation = (event) => {
         if (event.key === 'Enter') {
-            axios.get(url).then((response) => {
-                setData(response.data)
-                console.log(response.data)
-            })
-            setLocation('')
+            axios
+                .get(url)
+                .then((response) => {
+                    setData(response.data);
+                    setRequestHistory((prevHistory) => [...prevHistory, location]);
+                    setError('');
+                    console.log(response.data);
+                })
+                .catch((error) => {
+                    setError(<p className="history">Wrong city name</p>);
+                    console.error(error);
+                })
+                .finally(() => {
+                    setLocation('');
+                });
         }
     }
 
 
-    return (<div className="bigContener">
+    return (
+
+        <div className="bigContener">
             <div className="app">
                 <div className="search">
                     <input
                         value={location}
-                        onChange={event => setLocation(event.target.value)}
+
+                        onChange={(e) => setLocation(e.target.value)}
+
+
                         onKeyPress={searchLocation}
                         placeholder='Enter Location'
                         type="text"/>
+                    {error && <div className="error-message">{error}</div>}
+
                 </div>
                 <div className="container ">
                     <div className="top ">
@@ -61,6 +83,20 @@ function App() {
                 </div>
 
 
+                <div className="container">
+                    <p className="history">History:</p>
+                    {requestHistory.length > 0 && (
+                        <RequestHistory
+                            history={requestHistory}
+                            onHistoryItemClick={(selectedLocation) => {
+                                setLocation(selectedLocation);
+                                searchLocation({key: 'Enter'});
+                            }}
+                        />
+                    )}
+                    {error && <p>{error}</p>}
+
+                </div>
             </div>
         </div>
 
