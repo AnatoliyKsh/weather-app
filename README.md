@@ -1,4 +1,4 @@
-# Weather App in React
+# Weather App with React
 ## Screenshots
 <div><img src="public/piccc1.png" alt="Alt Text" width="23%" >
 <img src="public/Screenshot (13).png" alt="Alt Text" width="75%" >
